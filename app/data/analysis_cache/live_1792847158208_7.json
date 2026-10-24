@@ -1,0 +1,1 @@
+{"transcript": "પ્ર ધી. સર બની ગયું. સર બની ગયું.", "red_flags": [], "benign_signals": ["polite address ('સર')", "simple confirmation 'બની ગયું' (it's done) — no OTP, money, threat, or authority claim in this chunk"], "chunk_score": 1, "reason_gu": "આ ચંકમાં ફક્ત 'સર, બની ગયું' સંભળાય છે — કોઈ સ્કેમની નિશાની નથી.", "from": "saaras+glm"}

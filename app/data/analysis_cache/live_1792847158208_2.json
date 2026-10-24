@@ -1,0 +1,1 @@
+{"transcript": "એટલે તમે કૃપા કરીને ₹50 લાખ જમા કરાવો. જેથી કરીને અમે લોકો...", "red_flags": [{"category": "money_transfer", "quote": "₹50 લાખ જમા કરાવો", "severity": 9}], "benign_signals": [], "chunk_score": 8.5, "reason_gu": "ફોન કરનારે ₹50 લાખ રૂપિયા જમા કરાવવા માટે કહ્યું છે.", "from": "gemini"}

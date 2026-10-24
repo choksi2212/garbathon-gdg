@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanjog · સંજોગ — Lost & Found Reunification Agent</title>
+<style>
+  :root{
+    --bg:#0d0a1a; --card:#171130; --card2:#1f1837; --line:#2c2246;
+    --gold:#f5c542; --gold2:#ffe08a; --magenta:#e6437f; --teal:#3ec9a7;
+    --text:#efeaff; --dim:#9a8fc0; --red:#ff5a6e; --green:#4ade80;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,-apple-system,sans-serif}
+  body{background:var(--bg);color:var(--text);min-height:100vh}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(1000px 500px at 85% -10%, rgba(230,67,127,.14), transparent 60%),
+               radial-gradient(900px 480px at 10% -15%, rgba(245,197,66,.10), transparent 55%);}
+  .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:14px 16px 60px}
+  header{display:flex;align-items:center;gap:14px;padding:14px 4px 10px;flex-wrap:wrap}
+  .logo{font-size:30px}
+  .brand h1{font-size:26px;letter-spacing:.5px}
+  .brand h1 b{color:var(--gold)}
+  .brand .tag{color:var(--dim);font-size:12.5px;margin-top:2px}
+  .spacer{flex:1}
+  .badge{font-size:11px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);
+    background:var(--card);color:var(--dim);white-space:nowrap}
+  .badge b{color:var(--gold)}
+  .badge.mock{border-color:#7a5b12;color:#ffdf8a;background:#241a05}
+  .hbtn{cursor:pointer;font-size:11.5px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);
+    background:var(--card2);color:var(--dim);white-space:nowrap}
+  .hbtn:hover{color:var(--gold);border-color:var(--gold)}
+  nav{display:flex;gap:8px;margin:8px 0 18px;flex-wrap:wrap}
+  nav a{flex:1;min-width:150px;text-align:center;padding:12px 10px;border-radius:14px;text-decoration:none;
+    color:var(--dim);border:1.5px solid var(--line);background:var(--card);font-size:14px;font-weight:600}
+  nav a .gu{display:block;font-size:15.5px}
+  nav a .en{display:block;font-size:11px;font-weight:400;opacity:.75;margin-top:2px}
+  nav a.on{color:#1a1206;background:var(--gold);border-color:var(--gold)}
+  nav a.on .en{opacity:.85}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}
+  h2{font-size:17px;margin-bottom:4px}
+  h2 b{color:var(--gold)}
+  .sub{color:var(--dim);font-size:13px;margin-bottom:16px}
+  label.f{display:block;font-size:12.5px;color:var(--dim);margin:14px 0 6px}
+  select,input[type=text],textarea{width:100%;background:var(--card2);border:1px solid var(--line);color:var(--text);
+    border-radius:12px;padding:12px;font-size:14px;outline:none}
+  select:focus,input:focus,textarea:focus{border-color:var(--gold)}
+  textarea{min-height:74px;resize:vertical}
+  .btn{display:inline-block;width:100%;text-align:center;cursor:pointer;border:none;border-radius:14px;
+    padding:15px;font-size:16px;font-weight:800;margin-top:16px;
+    background:linear-gradient(100deg,var(--magenta),#b32a5e);color:#fff}
+  .btn.gold{background:linear-gradient(100deg,var(--gold),#d9a51e);color:#1a1206}
+  .btn.small{width:auto;padding:9px 16px;font-size:13px;margin:0}
+  .btn:active{transform:scale(.985)}
+  .btn:disabled{opacity:.5;cursor:wait}
+  /* mic */
+  .miczone{display:flex;flex-direction:column;align-items:center;padding:18px 0 6px}
+  .mic{width:104px;height:104px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;
+    justify-content:center;font-size:42px;background:radial-gradient(circle at 32% 28%,#31254f,#1c1433);
+    border:2px solid var(--line);box-shadow:0 0 0 0 rgba(230,67,127,.5);transition:.2s}
+  .mic.rec{border-color:var(--magenta);background:radial-gradient(circle at 32% 28%,#4d1f34,#281024);animation:pulse 1.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(230,67,127,.55)}70%{box-shadow:0 0 0 26px rgba(230,67,127,0)}100%{box-shadow:0 0 0 0 rgba(230,67,127,0)}}
+  .micmsg{margin-top:10px;text-align:center}
+  .micmsg .gu{font-size:15px;font-weight:700}
+  .micmsg .en{font-size:12px;color:var(--dim);margin-top:2px}
+  .timer{font-variant-numeric:tabular-nums;color:var(--magenta);font-size:13px;margin-top:6px;min-height:18px}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .photo-box{display:flex;align-items:center;gap:14px}
+  .phbtn{position:relative;overflow:hidden;display:inline-block;padding:12px 16px;border-radius:12px;cursor:pointer;
+    background:var(--card2);border:1px dashed var(--dim);font-size:13px;color:var(--dim)}
+  .phbtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+  .phprev{width:88px;height:88px;border-radius:12px;object-fit:cover;border:1px solid var(--line);display:none}
+  /* profile result */
+  .profile{border:1px solid var(--line);background:var(--card2);border-radius:16px;padding:16px;margin-top:16px;display:none}
+  .profile.show{display:block;animation:fade .35s}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .chip{font-size:12px;padding:5px 11px;border-radius:999px;background:#2b2150;border:1px solid #3d2f66}
+  .chip.c{background:#3d1130;border-color:#6e2352;color:#ffb3cf}
+  .src{font-size:11px;color:var(--dim);margin-top:10px}
+  .src b{color:var(--teal)}
+  .pa{margin-top:14px;border-left:3px solid var(--gold);background:#221a08;border-radius:10px;padding:12px 14px}
+  .pa .lab{font-size:11px;color:var(--gold2);letter-spacing:1px;margin-bottom:6px}
+  .pa p{font-size:14px;line-height:1.5;color:#ffeec2}
+  audio{width:100%;margin-top:8px}
+  .matchbox{margin-top:16px;border-radius:16px;padding:16px;display:none;border:1px solid var(--line)}
+  .matchbox.show{display:block;animation:fade .35s}
+  .matchbox.hot{border-color:var(--green);background:#07220f}
+  .matchbox.cold{background:var(--card2)}
+  .score{font-size:34px;font-weight:900;color:var(--green)}
+  .side2{display:flex;gap:8px;margin:12px 0}
+  .side2 img{width:50%;border-radius:10px;height:150px;object-fit:cover;border:1px solid var(--line)}
+  /* console */
+  .banner{border-radius:16px;padding:16px 18px;margin-bottom:14px;font-size:16px;font-weight:700;
+    border:1px solid var(--line);background:var(--card);display:flex;gap:12px;align-items:center}
+  .banner.lost{border-color:var(--red);background:#2a0d14;color:#ffc4cc}
+  .banner.reunited{border-color:var(--green);background:#07220f;color:#c8ffd9}
+  .banner.match{border-color:var(--gold);background:#241a06;color:#ffe9ad}
+  .stats{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .stat{flex:1;min-width:120px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+  .stat .n{font-size:26px;font-weight:900}
+  .stat .l{font-size:11px;color:var(--dim);letter-spacing:1px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:860px){.cols{grid-template-columns:1fr}}
+  .colh{font-size:12px;letter-spacing:2px;color:var(--red);margin:4px 2px 8px;font-weight:800}
+  .colh.f{color:var(--teal)}
+  .case{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;display:flex;gap:12px}
+  .case img{width:74px;height:74px;border-radius:10px;object-fit:cover;flex-shrink:0;border:1px solid var(--line)}
+  .case .bd{flex:1;min-width:0}
+  .case .nm{font-weight:800;font-size:14.5px}
+  .case .meta{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.45}
+  .case .pill{font-size:10px;padding:2px 8px;border-radius:999px;margin-top:6px;display:inline-block}
+  .pill.reunited{background:#07220f;color:var(--green);border:1px solid #14532d}
+  .pill.active{background:#2a0d14;color:#ff8fa0;border:1px solid #6e2337}
+  .pill.active.f{background:#04201e;color:#6ee7d7;border:1px solid #116055}
+  .play{cursor:pointer;font-size:11px;color:var(--gold);border:1px solid var(--gold);border-radius:8px;
+    padding:3px 9px;margin-top:6px;background:transparent}
+  .mfeed{margin-top:16px}
+  .mcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+  .bar{height:8px;border-radius:99px;background:#241a3f;margin:10px 0;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--magenta),var(--gold))}
+  .ticker{position:fixed;left:0;right:0;bottom:0;background:#0a0714;border-top:1px solid var(--line);z-index:5}
+  .ticker .in{max-width:1180px;margin:0 auto;display:flex;gap:16px;padding:8px 16px;font-size:12px;color:var(--dim);overflow:hidden;white-space:nowrap}
+  .ticker .ev{display:inline-flex;gap:6px;align-items:center}
+  .flash{animation:flashbg 1s}
+  @keyframes flashbg{0%{background:#3d1130}100%{background:transparent}}
+  .note{font-size:11.5px;color:var(--dim);margin-top:8px;line-height:1.5}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">🪔</div>
+    <div class="brand">
+      <h1>San<b>jog</b> · સંજોગ</h1>
+      <div class="tag">Lost &amp; Found Reunification Agent · દરેક બાળક પાછું મળે — every child goes home safe</div>
+    </div>
+    <div class="spacer"></div>
+    <span class="badge" id="engBadge">engine: <b>…</b></span>
+    <button class="hbtn" id="modeBtn" title="engine mode: AUTO = real APIs, MOCK = offline-safe demo">AUTO</button>
+    <button class="hbtn" id="prefBtn" title="provider chain: SHOW = Gemini-first (limited quota, showtime) / REHEARSE = Vultr-first (unlimited)">SHOW</button>
+    <button class="hbtn" onclick="seed()" title="rehearsal scenario">▶ rehearse</button>
+    <button class="hbtn" onclick="resetAll()" title="clear registry">♻</button>
+  </header>
+
+  <nav>
+    <a href="#report" id="nav-report"><span class="gu">🚨 બાળક ખોયું છે</span><span class="en">Report a LOST child</span></a>
+    <a href="#gate" id="nav-gate"><span class="gu">📸 બાળક મળ્યું છે</span><span class="en">Report a FOUND child</span></a>
+    <a href="#console" id="nav-console"><span class="gu">🛡 કંટ્રોલ રૂમ</span><span class="en">Command console</span></a>
+  </nav>
+
+  <!-- ============ REPORT LOST (parent) ============ -->
+  <section id="view-report" class="hidden">
+    <div class="card">
+      <h2>તમારું બાળક ખોયું છે? <b>ગાળો નહીં — બોલો.</b></h2>
+      <div class="sub">Speak in ANY language — Gujarati, Hindi, English. Sanjog listens, understands, and alerts every gate in seconds.</div>
+      <div class="miczone">
+        <button class="mic" id="micBtn" onclick="micToggle()">🎙</button>
+        <div class="micmsg">
+          <div class="gu">દબાવો અને બાળક વિશે કહો</div>
+          <div class="en">Tap and describe your child — clothes, age, where you last saw them</div>
+        </div>
+        <div class="timer" id="micTimer"></div>
+      </div>
+      <audio id="playback" controls class="hidden" style="width:100%"></audio>
+
+      <label class="f">or type it — કાંતો લખો</label>
+      <textarea id="lostText" placeholder="My son Aarav, 7 years old, red kurta, denim shorts, last seen near the dhol stage…"></textarea>
+
+      <label class="f">Photo of your child (if you have one) — ફોટો</label>
+      <div class="photo-box">
+        <label class="phbtn">📷 Choose photo<input type="file" id="lostPhoto" accept="image/*" onchange="phPrev(this,'lp')"></label>
+        <img id="lp" class="phprev" alt="">
+      </div>
+
+      <div class="row" style="margin-top:14px">
+        <div style="flex:1;min-width:180px">
+          <label class="f">Where are you right now? — તમે ક્યાં છો?</label>
+          <select id="lostGate"></select>
+        </div>
+        <div style="flex:1;min-width:180px">
+          <label class="f">Your name (optional)</label>
+          <input type="text" id="lostReporter" placeholder="e.g. Meera">
+        </div>
+      </div>
+
+      <button class="btn" id="lostBtn" onclick="reportLost()">મદદ માંગો — GET HELP 🚨</button>
+
+      <div class="profile" id="lostProfile"></div>
+    </div>
+  </section>
+
+  <!-- ============ REPORT FOUND (gate volunteer) ============ -->
+  <section id="view-gate" class="hidden">
+    <div class="card">
+      <h2>બાળક મળ્યું છે? <b>એક ફોટો — બસ.</b></h2>
+      <div class="sub">Take one photo. Sanjog reads it, builds the profile, and instantly checks it against every active lost child.</div>
+      <div class="photo-box">
+        <label class="phbtn">📷 Take photo of the child<input type="file" id="foundPhoto" accept="image/*" capture="environment" onchange="phPrev(this,'fp')"></label>
+        <img id="fp" class="phprev" alt="">
+      </div>
+
+      <label class="f">Optional — anything the child said (type or speak)</label>
+      <textarea id="foundNote" placeholder="Won't say his name… keeps asking for his mother. Speaks Hindi."></textarea>
+
+      <div class="row" style="margin-top:14px">
+        <div style="flex:1;min-width:180px">
+          <label class="f">Which gate? — કયો ગેટ?</label>
+          <select id="foundGate"></select>
+        </div>
+        <div style="flex:1;min-width:180px">
+          <label class="f">Volunteer name (optional)</label>
+          <input type="text" id="foundReporter" placeholder="e.g. Jay">
+        </div>
+      </div>
+
+      <button class="btn gold" id="foundBtn" onclick="reportFound()">રિપોર્ટ કરો — REPORT FOUND 📸</button>
+
+      <div class="profile" id="foundProfile"></div>
+      <div class="matchbox" id="foundMatch"></div>
+    </div>
+  </section>
+
+  <!-- ============ CONSOLE ============ -->
+  <section id="view-console" class="hidden">
+    <div class="banner" id="banner">સંજોગ કંટ્રોલ રૂમ — live registry. All gates connected.</div>
+    <div class="stats">
+      <div class="stat"><div class="n" style="color:var(--red)" id="stLost">0</div><div class="l">LOST · ખોયેલા</div></div>
+      <div class="stat"><div class="n" style="color:var(--teal)" id="stFound">0</div><div class="l">FOUND · મળેલા</div></div>
+      <div class="stat"><div class="n" style="color:var(--green)" id="stRe">0</div><div class="l">REUNITED · પાછા મળ્યા</div></div>
+    </div>
+    <div class="cols">
+      <div>
+        <div class="colh">🚨 LOST — ખોયેલા બાળકો</div>
+        <div id="lostCol"></div>
+      </div>
+      <div>
+        <div class="colh f">📸 FOUND — મળેલા બાળકો</div>
+        <div id="foundCol"></div>
+      </div>
+    </div>
+    <div class="mfeed" id="matchFeed"></div>
+  </section>
+</div>
+
+<div class="ticker"><div class="in" id="ticker"></div></div>
+
+<script>
+/* ---------------- routing ---------------- */
+const GATES = ["Gate 1","Gate 2","Gate 3","Gate 4","Food Court","Dhol Stage","Parking","Main Road"];
+let view = location.hash.replace("#","") || "report";
+function route(){
+  view = ["report","gate","console"].includes(location.hash.replace("#","")) ? location.hash.replace("#","") : "report";
+  ["report","gate","console"].forEach(v=>{
+    document.getElementById("view-"+v).classList.toggle("hidden", v!==view);
+    document.getElementById("nav-"+v).classList.toggle("on", v===view);
+  });
+}
+window.onhashchange = route;
+[GATES_html(), initGates(), route(), pollLoop()];
+
+function GATES_html(){}
+function initGates(){
+  const opts = GATES.map(g=>`<option>${g}</option>`).join("");
+  document.getElementById("lostGate").innerHTML = opts;
+  document.getElementById("foundGate").innerHTML = opts;
+}
+
+/* ---------------- helpers ---------------- */
+const $ = id => document.getElementById(id);
+async function api(path, body){
+  const r = await fetch(path, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body||{})});
+  return r.json();
+}
+function ago(ts){
+  const m = Math.round((Date.now()/1000 - ts)/60);
+  if(m<1) return "just now"; if(m<60) return m+" min ago";
+  return Math.round(m/60)+"h ago";
+}
+function phPrev(inp, imgId){
+  const f = inp.files[0]; if(!f) return;
+  const img = $(imgId); img.style.display="block";
+  img.src = URL.createObjectURL(f);
+}
+
+/* ---------------- WAV recorder (no ffmpeg, no webm drama) ---------------- */
+let rec = {ctx:null, proc:null, chunks:[], recording:false, t0:0, timer:null};
+function micToggle(){
+  if(rec.recording){ stopMic(); } else { startMic(); }
+}
+function startMic(){
+  navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{
+    rec.ctx = new (window.AudioContext||window.webkitAudioContext)({sampleRate:24000});
+    const src = rec.ctx.createMediaStreamSource(stream);
+    rec.proc = rec.ctx.createScriptProcessor(4096,1,1);
+    rec.chunks = []; rec.recording = true; rec.t0 = Date.now();
+    rec.stream = stream;
+    rec.proc.onaudioprocess = e=>{ if(rec.recording) rec.chunks.push(new Float32Array(e.inputBuffer.getChannelData(0))); };
+    src.connect(rec.proc); rec.proc.connect(rec.ctx.destination);
+    $("micBtn").classList.add("rec"); $("micBtn").innerText="⏹";
+    rec.timer = setInterval(()=>{
+      const s = Math.floor((Date.now()-rec.t0)/1000);
+      $("micTimer").innerText = `🔴 recording… ${s}s / 15s`;
+      if(s>=15) stopMic();
+    },250);
+  }).catch(err=>{
+    $("micTimer").innerText = "⚠ mic blocked — type below instead";
+  });
+}
+function stopMic(){
+  if(!rec.recording) return;
+  rec.recording = false; clearInterval(rec.timer);
+  $("micBtn").classList.remove("rec"); $("micBtn").innerText="🎙";
+  const blob = encodeWav(rec.chunks, rec.ctx.sampleRate);
+  rec.stream.getTracks().forEach(t=>t.stop());
+  rec.ctx.close();
+  $("micTimer").innerText = "✓ recorded — ready to send ("+(blob.size/1024).toFixed(0)+" KB)";
+  const pb = $("playback"); pb.classList.remove("hidden");
+  pb.src = URL.createObjectURL(blob);
+  rec.blob = blob;
+}
+function encodeWav(chunks, rate){
+  let len = 0; chunks.forEach(c=>len+=c.length);
+  const buf = new ArrayBuffer(44 + len*2);
+  const v = new DataView(buf);
+  const ws = (o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i));};
+  ws(0,"RIFF"); v.setUint32(4,36+len*2,true); ws(8,"WAVE"); ws(12,"fmt ");
+  v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,1,true);
+  v.setUint32(24,rate,true); v.setUint32(28,rate*2,true); v.setUint16(32,2,true); v.setUint16(34,16,true);
+  ws(36,"data"); v.setUint32(40,len*2,true);
+  let off=44;
+  chunks.forEach(c=>{ for(let i=0;i<c.length;i++,off+=2){ const s=Math.max(-1,Math.min(1,c[i])); v.setInt16(off, s<0?s*0x8000:s*0x7FFF, true);} });
+  return new Blob([buf],{type:"audio/wav"});
+}
+
+/* ---------------- report lost ---------------- */
+async function reportLost(){
+  const fd = new FormData();
+  const txt = $("lostText").value.trim();
+  if(rec.blob) fd.append("audio", rec.blob, "voice.wav");
+  if(txt) fd.append("text", txt);
+  const pf = $("lostPhoto").files[0];
+  if(pf) fd.append("photo", await shrink(pf), "photo.jpg");
+  fd.append("gate", $("lostGate").value);
+  fd.append("reporter", $("lostReporter").value.trim());
+  if(!rec.blob && !txt && !pf){ alert("બોલો, લખો કે ફોટો આપો — speak, type, or add a photo first"); return; }
+  $("lostBtn").disabled = true; $("lostBtn").innerText = "AI સાંભળી રહ્યું છે — listening…";
+  const r = await fetch("/api/report/lost",{method:"POST",body:fd});
+  const j = await r.json();
+  $("lostBtn").disabled = false; $("lostBtn").innerText = "મદદ માંગો — GET HELP 🚨";
+  if(j.ok){
+    const c = j.case;
+    $("lostProfile").innerHTML =
+      `<h2>AI સમજી ગયું — <b>Sanjog understood</b> ✓ <span class="chip">${c.id}</span></h2>
+       <div class="chips">
+         ${c.name?`<span class="chip">👤 ${c.name}</span>`:""}
+         ${c.age?`<span class="chip">🎂 ${c.age}</span>`:""}
+         <span class="chip">${c.gender||"?"}</span>
+         ${(c.colors||[]).map(x=>`<span class="chip c">${x}</span>`).join("")}
+       </div>
+       <p style="margin-top:10px;font-size:14px">${c.clothing||""} ${c.details?`— ${c.details}`:""}</p>
+       <div class="src">profile extracted by <b>${c.from}</b> · alerting all gates…</div>
+       ${c.announcement?`<div class="pa"><div class="lab">📢 PA ANNOUNCEMENT — તૈયાર</div><p>${c.announcement.gu}</p>
+         ${c.announcement.audio?`<audio controls src="${c.announcement.audio}"></audio>`:`<div class="note">TTS unavailable — announcement text above is being read aloud at gates.</div>`}
+       </div>`:""}
+       <div class="note">Now show the <a href="#console" style="color:var(--gold)">command console</a> — every gate volunteer just got this profile.</div>`;
+    $("lostProfile").classList.add("show");
+    location.hash = "report";
+    rec.blob = null; $("playback").classList.add("hidden");
+  } else { alert("report failed: "+JSON.stringify(j)); }
+}
+
+/* ---------------- report found ---------------- */
+async function shrink(file){
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+  await img.decode();
+  const c = document.createElement("canvas");
+  const s = Math.min(1, 800/Math.max(img.width,img.height));
+  c.width = img.width*s; c.height = img.height*s;
+  c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+  const blob = await new Promise(res=>c.toBlob(res,"image/jpeg",0.85));
+  URL.revokeObjectURL(img.src);
+  return blob;
+}
+async function reportFound(){
+  const pf = $("foundPhoto").files[0];
+  if(!pf){ alert("એક ફોટો લો — take a photo first"); return; }
+  const fd = new FormData();
+  fd.append("photo", await shrink(pf), "photo.jpg");
+  const note = $("foundNote").value.trim();
+  if(note) fd.append("note", note);
+  fd.append("gate", $("foundGate").value);
+  fd.append("reporter", $("foundReporter").value.trim());
+  $("foundBtn").disabled = true; $("foundBtn").innerText = "AI ફોટો વાંચે છે — reading the photo…";
+  const r = await fetch("/api/report/found",{method:"POST",body:fd});
+  const j = await r.json();
+  $("foundBtn").disabled = false; $("foundBtn").innerText = "રિપોર્ટ કરો — REPORT FOUND 📸";
+  if(j.ok){
+    const c = j.case, m = j.top_match;
+    $("foundProfile").innerHTML =
+      `<h2>AI ફોટો વાંધી ગયું — <b>profile extracted</b> ✓ <span class="chip">${c.id}</span></h2>
+       <div class="chips"><span class="chip">🎂 ${c.age||"~7"}</span><span class="chip">${c.gender||"?"}</span>
+         ${(c.colors||[]).map(x=>`<span class="chip c">${x}</span>`).join("")}</div>
+       <p style="margin-top:10px;font-size:14px">${c.clothing||""} ${c.details?`— ${c.details}`:""}</p>
+       <div class="src">vision by <b>${c.from}</b> · matched against active lost cases</div>`;
+    $("foundProfile").classList.add("show");
+    const mb = $("foundMatch");
+    if(m && m.score>=60){
+      mb.className = "matchbox show hot";
+      mb.innerHTML = `<h2>🎯 MATCH FOUND — <span class="score">${m.score}%</span></h2>
+        <div class="side2"><img src="/static/uploads/${m.lost_id}.jpg" onerror="this.style.display='none'"><img src="/static/uploads/${m.found_id}.jpg"></div>
+        <p style="font-size:13.5px">${m.reasoning||""}</p>
+        <button class="btn gold" onclick="confirmMatch('${m.id}')">✓ ખાતરી કરો — VERIFY &amp; REUNITE</button>`;
+    } else {
+      mb.className = "matchbox show cold";
+      mb.innerHTML = `<h2>હજુ મેચ નથી — registered, watching</h2>
+        <p style="font-size:13px;color:var(--dim);margin-top:6px">No strong match yet. Profile is live on the console — the moment a lost report fits, all gates get the alert.</p>`;
+    }
+  } else { alert("report failed: "+JSON.stringify(j)); }
+}
+
+async function confirmMatch(id){
+  const j = await api("/api/match/confirm",{match_id:id});
+  if(j.ok){
+    const mb = $("foundMatch");
+    mb.className = "matchbox show hot";
+    mb.innerHTML = `<h2>✅ પાછા મળી ગયા — REUNITED!</h2>
+      <p style="font-size:13.5px;margin-top:8px">${j.text?j.text.gu:""}</p>
+      ${j.audio?`<audio controls autoplay src="${j.audio}"></audio>`:""}
+      <div class="note">All gates notified · parents called · announcement broadcast</div>`;
+  }
+}
+
+/* ---------------- console polling ---------------- */
+let lastSeq = 0, firstPoll = true;
+async function pollLoop(){
+  try{
+    const r = await fetch(`/api/state?since=${lastSeq}`);
+    const s = await r.json();
+    lastSeq = s.seq;
+    renderConsole(s);
+    if(s.events.length && !firstPoll) blip(s.events);
+    firstPoll = false;
+    const h = s.health;
+    const b = $("engBadge");
+    b.innerHTML = `engine: <b>${h.mode==="mock"?"MOCK-SAFE":h.last_provider||"auto"}</b>${h.last_error?` ⚠`:""}`;
+    b.classList.toggle("mock", h.mode==="mock");
+    $("modeBtn").innerText = h.mode==="mock" ? "MOCK" : "AUTO";
+    $("prefBtn").innerText = h.pref==="rehearse" ? "REHEARSE" : "SHOW";
+    if(h.pref==="rehearse") b.innerHTML = `engine: <b>${h.last_provider||"auto"}</b> · quota-free`;
+  }catch(e){}
+  setTimeout(pollLoop, 1600);
+}
+function renderConsole(s){
+  const lost = s.cases.filter(c=>c.kind==="lost");
+  const found = s.cases.filter(c=>c.kind==="found");
+  $("stLost").innerText = lost.filter(c=>c.status==="active").length;
+  $("stFound").innerText = found.filter(c=>c.status==="active").length;
+  $("stRe").innerText = s.cases.filter(c=>c.status==="reunited").length;
+  const card = c=>`<div class="case">
+      ${c.photo?`<img src="${c.photo}">`:""}
+      <div class="bd">
+        <div class="nm">${c.id} · ${c.name||"unnamed child"}${c.age?" · "+c.age:""}</div>
+        <div class="meta">${c.clothing||""}<br>📍 ${c.gate} · ${ago(c.created)} · ${c.reporter||"volunteer"}</div>
+        <span class="pill ${c.status==="reunited"?"reunited":"active"+(c.kind==="found"?" f":"")}">${c.status==="reunited"?"✅ reunited":"🔴 active"}</span>
+        ${c.announcement&&c.announcement.audio?`<br><button class="play" onclick="playUrl('${c.announcement.audio}')">▶ PA</button>`:""}
+      </div>
+    </div>`;
+  $("lostCol").innerHTML = lost.map(card).join("") || `<div class="note">કોઈ ખોયેલું બાળક નથી — no lost children right now. સારું લાગે છે 🙏</div>`;
+  $("foundCol").innerHTML = found.map(card).join("") || `<div class="note">કોઈ મળેલું બાળક નથી — none found yet.</div>`;
+  const ms = s.matches;
+  $("matchFeed").innerHTML = ms.length ? `<div class="colh" style="color:var(--gold)">🎯 MATCH BRAIN</div>` +
+    ms.slice().sort((a,b)=>b.score-a.score).map(m=>{
+      const L = s.cases.find(c=>c.id===m.lost_id)||{}, F = s.cases.find(c=>c.id===m.found_id)||{};
+      return `<div class="mcard" id="m-${m.id}">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><b>${m.lost_id}</b> × <b>${m.found_id}</b> · ${m.status==="confirmed"?"✅ confirmed":"pending verify"}</div>
+          <div class="score" style="font-size:22px">${m.score}%</div>
+        </div>
+        <div class="bar"><i style="width:${m.score}%"></i></div>
+        <p style="font-size:12.5px;color:var(--dim)">${m.reasoning||""} <span style="opacity:.6">· engine: ${m.from}</span></p>
+        <div class="side2">${L.photo?`<img src="${L.photo}">`:""}${F.photo?`<img src="${F.photo}">`:""}</div>
+        ${m.status==="confirmed"
+          ?`<div class="note">✅ Reunited — parents called, all gates notified.</div>`
+          :`<button class="btn small gold" onclick="confirmMatch('${m.id}')">✓ Verify &amp; reunite</button>`}
+      </div>`;
+    }).join("") : "";
+  const evs = s.events;
+  const last = evs[evs.length-1];
+  if(last){
+    const bn = $("banner");
+    const cls = last.kind==="lost"?"lost":last.kind==="reunited"?"reunited":(last.kind==="match"||last.kind==="pa")?"match":"";
+    bn.className = "banner "+cls;
+    bn.innerHTML = `<span style="font-size:22px">${last.icon}</span><span>${last.text}</span>`;
+  }
+  $("ticker").innerHTML = evs.slice(-14).reverse().map(e=>`<span class="ev">${e.icon} ${e.text}</span>`).join("");
+}
+function blip(evs){
+  const critical = evs.find(e=>["match","reunited","pa"].includes(e.kind));
+  if(critical && critical.data && critical.data.audio){
+    try{ const a = new Audio(critical.data.audio); a.play(); }catch(e){}
+  }
+}
+function playUrl(u){ try{ new Audio(u).play(); }catch(e){} }
+
+/* ---------------- system buttons ---------------- */
+async function seed(){ await api("/api/seed",{}); location.hash="console"; }
+async function resetAll(){ await api("/api/reset",{}); }
+$("modeBtn").onclick = async ()=>{
+  const cur = $("modeBtn").innerText.trim()==="AUTO" ? "mock" : "auto";
+  await api("/api/mode",{value:cur});
+};
+$("prefBtn").onclick = async ()=>{
+  const cur = $("prefBtn").innerText.trim()==="REHEARSE" ? "show" : "rehearse";
+  await api("/api/provider",{value:cur});
+};
+</script>
+</body>
+</html>

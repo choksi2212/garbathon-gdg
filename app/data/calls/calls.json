@@ -1,0 +1,22 @@
+{
+ "scam1_digital_arrest_SYNTH": {
+  "file": "N:\\HERMESSSS\\garbathon-2026\\sanjog\\data\\calls\\scam1_digital_arrest_SYNTH.wav",
+  "seconds": 56.3,
+  "turns": 8
+ },
+ "scam2_fake_kyc_otp_SYNTH": {
+  "file": "N:\\HERMESSSS\\garbathon-2026\\sanjog\\data\\calls\\scam2_fake_kyc_otp_SYNTH.wav",
+  "seconds": 41.2,
+  "turns": 7
+ },
+ "scam3_fake_courier_SYNTH": {
+  "file": "N:\\HERMESSSS\\garbathon-2026\\sanjog\\data\\calls\\scam3_fake_courier_SYNTH.wav",
+  "seconds": 40.0,
+  "turns": 7
+ },
+ "genuine_bank_followup_SYNTH": {
+  "file": "N:\\HERMESSSS\\garbathon-2026\\sanjog\\data\\calls\\genuine_bank_followup_SYNTH.wav",
+  "seconds": 39.9,
+  "turns": 6
+ }
+}

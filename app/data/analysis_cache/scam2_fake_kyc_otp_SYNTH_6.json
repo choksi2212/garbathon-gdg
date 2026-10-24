@@ -1,0 +1,1 @@
+{"transcript": "ओटीपी बताइए और फ़ोन नहीं काटना, लाइन पर रहिए।", "red_flags": [{"category": "otp_request", "quote": "ओटीपी बताइए"}, {"category": "secrecy_instruction", "quote": "फ़ोन नहीं काटना, लाइन पर रहिए"}], "benign_signals": [], "chunk_score": 9, "reason_gu": "કૉલર ઓટીપી માંગે છે અને ફોન કાપવા મના કરે છે, જે સ્કેમરની સામાન્ય યુક્તિ છે.", "from": "saaras+glm"}

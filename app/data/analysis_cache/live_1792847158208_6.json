@@ -1,0 +1,1 @@
+{"transcript": "Prabhdeep. Prabhdeep. Prabhdeep.", "red_flags": [], "benign_signals": ["caller only repeats a name, no request made", "no OTP, money, threat, or urgency language in this chunk"], "chunk_score": 0, "reason_gu": "આ ચંકમાં કોઈ ફક્ત 'પ્રભદીપ' નામ ત્રણ વાર બોલે છે, પૈસા કે OTP ની કોઈ વાત નથી.", "from": "saaras+glm"}

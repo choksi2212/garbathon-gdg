@@ -1,0 +1,1 @@
+{"transcript": "आधार नंबर दोनों चाहिए वरना खाते के सारे पैसे फ्रीज़ हो जाएंगे, जल्दी बोलिए। ठीक है, एस एम एस दे।", "red_flags": ["aadhaar_pan_request", "fear_induction", "threat_legal", "urgency"], "benign_signals": [], "chunk_score": 8, "reason_gu": "કોઈ ફોન પર આધાર નંબર માંગે છે અને ન આપો તો ખાતાના બધા પૈસા ફ્રીઝ થઈ જશે એમ ધમકી આપે છે.", "from": "saaras+glm"}

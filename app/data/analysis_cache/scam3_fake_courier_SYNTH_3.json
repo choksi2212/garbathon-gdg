@@ -1,0 +1,1 @@
+{"transcript": "5 वीडियो कॉल पर होगी। अभी आइए। मम्मी को बताते हैं। किसी को नहीं बताना कि", "red_flags": [{"category": "secrecy_instruction", "quote": "किसी को नहीं बताना"}, {"category": "video_arrest", "quote": "वीडियो कॉल पर होगी"}], "benign_signals": [], "chunk_score": 6, "reason_gu": "તે કહે છે કે કોઈને આ વાત નથી કહેવી અને વિડિયો કોલ પર આવવાનું કહે છે.", "from": "saaras+glm"}

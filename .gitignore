@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+app/static/announcements/
+app/data/turn_cache/
+.DS_Store
