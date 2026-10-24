@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>છેલ્લો દ્વાર · Chhello Dwar — The Last Door | Scam Call Shield</title>
+  <meta name="description" content="છેલ્લો દ્વાર · Chhello Dwar — The Last Door: an end-to-end Gemini voice agent that interrupts scam calls in Gujarati, mid-call, before the money moment.">
+  <style>
+    /* accessibility: visible keyboard focus + respect reduced motion */
+    a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px solid #1A1A1A; outline-offset: 2px; border-radius: 4px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+  </style>
 <style>
 /* vietnamese */
 @font-face {
@@ -976,12 +982,13 @@ nav a.on .en{color:#1A1A1A}
   <link rel="icon" href="/static/icon-192.png">
 </head>
 <body>
-<div class="wrap">
+  <a class="skip" href="#app" style="position:absolute;left:-9999px;top:0;background:#1A1A1A;color:#FFF8E7;padding:10px 16px;z-index:999;border-radius:0 0 8px 0;font-weight:700" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to main content</a>
+<div role="main" aria-label="Chhello Dwar Scam Call Shield" class="wrap">
   <header>
     <div class="langbar" role="group" aria-label="Language">
-      <button class="lbtn" data-lang="gu" onclick="setLang('gu')">ગુજરાતી</button>
-      <button class="lbtn" data-lang="hi" onclick="setLang('hi')">हिन्दी</button>
-      <button class="lbtn" data-lang="en" onclick="setLang('en')">English</button>
+      <button class="lbtn" data-lang="gu" onclick="setLang('gu')" aria-label="ગુજરાતી">ગુજરાતી</button>
+      <button class="lbtn" data-lang="hi" onclick="setLang('hi')" aria-label="हिन्दी">हिन्दी</button>
+      <button class="lbtn" data-lang="en" onclick="setLang('en')" aria-label="English">English</button>
     </div>
     <div class="logo">🪔</div>
     <div class="brand">
@@ -1011,7 +1018,7 @@ nav a.on .en{color:#1A1A1A}
       <h2 id="rakH2">છેલ્લો દ્વાર · <b>The Last Door</b></h2>
       <div class="sub" id="rakSub">The call is playing live. Chhello Dwar listens with Gemini, and if it hears a scam — it interrupts the call, in Gujarati, before the money moment.</div>
       <div id="rakPicker" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:16px"></div>
-      <button class="btn gold" id="rkLiveBtn" onclick="rkLiveStart()" style="margin-top:18px;max-width:420px">🎤 LIVE — બોલો, શીલ્ડ સાંભળે છે · speak to the shield</button>
+      <button class="btn gold" id="rkLiveBtn" onclick="rkLiveStart()" style="margin-top:18px;max-width:420px" aria-label="🎤 LIVE — બોલો, શીલ્ડ સાંભળે છે · speak to the shield">🎤 LIVE — બોલો, શીલ્ડ સાંભળે છે · speak to the shield</button>
       <div id="rakLive" class="hidden">
         <div class="rk-bar">
           <span id="rakState">● સાંભળી રહ્યું છે…</span>
@@ -1020,7 +1027,7 @@ nav a.on .en{color:#1A1A1A}
         <div id="rakTranscript" class="rk-transcript"></div>
         <div id="rakFlags" class="chips" style="margin-top:12px"></div>
         <div id="rakWarning" class="rk-warning hidden"></div>
-        <button class="btn" id="rakStopBtn" onclick="if(RKL.running){rkLiveStop()}else{rkStop()}" style="margin-top:18px">■ બંધ કરો · stop</button>
+        <button class="btn" id="rakStopBtn" onclick="if(RKL.running){rkLiveStop()}else{rkStop()}" style="margin-top:18px" aria-label="■ બંધ કરો · stop">■ બંધ કરો · stop</button>
       </div>
     </div>
   </section>
@@ -1295,9 +1302,9 @@ async function reportFound(){
       mb.className = "matchbox show hot";
       mb.scrollIntoView({behavior:"smooth",block:"center"});
       mb.innerHTML = `<h2>${t("matchFound")} — <span class="score">${m.score}%</span></h2>
-        <div class="side2"><img src="/static/uploads/${m.lost_id}.jpg" onerror="this.style.display='none'"><img src="/static/uploads/${m.found_id}.jpg"></div>
+        <div class="side2"><img src="/static/uploads/${m.lost_id}.jpg" onerror="this.style.display='none'" alt="Chhello Dwar — The Last Door"><img src="/static/uploads/${m.found_id}.jpg" alt="Chhello Dwar — The Last Door"></div>
         <p style="font-size:13.5px">${m.reasoning||""}</p>
-        <button class="btn gold" onclick="confirmMatch('${m.id}')">${t("verify")}</button>`;
+        <button class="btn gold" onclick="confirmMatch('${m.id}')" aria-label="${t("verify")}">${t("verify")}</button>`;
     } else {
       mb.className = "matchbox show cold";
       mb.innerHTML = `<h2>${t("noMatch")}</h2>
@@ -1345,12 +1352,12 @@ function renderConsole(s){
   putTxt($("stFound"), found.filter(c=>c.status==="active").length);
   putTxt($("stRe"), s.cases.filter(c=>c.status==="reunited").length);
   const card = c=>`<div class="case">
-      ${c.photo?`<img src="${c.photo}">`:""}
+      ${c.photo?`<img src="${c.photo}" alt="Chhello Dwar — The Last Door">`:""}
       <div class="bd">
         <div class="nm">${c.id} · ${c.name||t("unnamed")}${c.age?" · "+c.age:""}</div>
         <div class="meta">${c.clothing||""}<br>📍 ${c.gate} · ${ago(c.created)} · ${c.reporter||"volunteer"}</div>
         <span class="pill ${c.status==="reunited"?"reunited":"active"+(c.kind==="found"?" f":"")}">${c.status==="reunited"?t("reunitedTag"):t("active")}</span>
-        ${c.announcement&&c.announcement.audio?`<br><button class="play" onclick="playUrl('${c.announcement.audio}')">▶ PA</button>`:""}
+        ${c.announcement&&c.announcement.audio?`<br><button class="play" onclick="playUrl('${c.announcement.audio}')" aria-label="▶ PA">▶ PA</button>`:""}
       </div>
     </div>`;
   put($("lostCol"), lost.map(card).join("") || `<div class="note">${t("emptyLost")}</div>`);
@@ -1366,10 +1373,10 @@ function renderConsole(s){
         </div>
         <div class="bar"><i style="width:${m.score}%"></i></div>
         <p style="font-size:12.5px">${m.reasoning||""} <span style="opacity:.6">· engine: ${String(m.from||"").includes("gemini") ? m.from : "shield-core"}</span></p>
-        <div class="side2">${L.photo?`<img src="${L.photo}">`:""}${F.photo?`<img src="${F.photo}">`:""}</div>
+        <div class="side2">${L.photo?`<img src="${L.photo}" alt="Chhello Dwar — The Last Door">`:""}${F.photo?`<img src="${F.photo}" alt="Chhello Dwar — The Last Door">`:""}</div>
         ${m.status==="confirmed"
           ?`<div class="note">${t("confirmed")}</div>`
-          :`<button class="btn small" onclick="confirmMatch('${m.id}')">${t("verify")}</button>`}
+          :`<button class="btn small" onclick="confirmMatch('${m.id}')" aria-label="${t("verify")}">${t("verify")}</button>`}
       </div>`;
     }).join("") : "");
   const evs = s.events;
